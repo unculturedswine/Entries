@@ -7,7 +7,7 @@
 //
 
 #import "ESAppDelegate.h"
-#import "Entry.h"
+#import "EntryController.h"
 
 @implementation ESAppDelegate
 
@@ -18,23 +18,21 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    // 1) Retrieve existing entries
+    // 1) Check existing entries count
     
-    NSMutableArray *entries = [Entry loadEntriesFromDefaults];
+    NSLog(@"%ld entries stored",(unsigned long)[[EntryController sharedInstance].entries count]);
     
-    // 2) Initialize an Entry with a dictionary
+    // 2) Initialize an Entry. (No need to use a dictionary)
+    // This also means we can move the keys in Entry to the implementation file.
+
+    Entry *entry = [Entry new];
+    entry.title = @"A new journal entry";
+    entry.text = @"I want to write a very long note, but I'm out of time.";
+    entry.timestamp = [NSDate date];
     
-    Entry *entry = [[Entry alloc] initWithDictionary:@{titleKey: @"Some Title huh?", textKey: @"Random text that no-one will see"}];
+    // 3) Add that entry to the entry controller
     
-    // 3) Add that entry to the entry array
-    
-    [entries addObject:entry];
-    
-    // 4) Store the new array to user defaults
-    
-    [Entry storeEntriesInDefaults:entries];
-    
-    NSLog(@"%@", entries);
+    [[EntryController sharedInstance] addEntry:entry];
     
     return YES;
 }

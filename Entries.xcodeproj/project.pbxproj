@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4FF7BCE81A687676007AB98B /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7BCE71A687676007AB98B /* Entry.m */; };
+		4FF7BCEB1A6880A7007AB98B /* EntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7BCEA1A6880A7007AB98B /* EntryController.m */; };
 		711A50B619388277005642EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711A50B519388277005642EF /* Foundation.framework */; };
 		711A50B819388277005642EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711A50B719388277005642EF /* CoreGraphics.framework */; };
 		711A50BA19388277005642EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711A50B919388277005642EF /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* Begin PBXFileReference section */
 		4FF7BCE61A687676007AB98B /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
 		4FF7BCE71A687676007AB98B /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
+		4FF7BCE91A6880A7007AB98B /* EntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryController.h; sourceTree = "<group>"; };
+		4FF7BCEA1A6880A7007AB98B /* EntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryController.m; sourceTree = "<group>"; };
 		711A50B219388277005642EF /* Entries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Entries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		711A50B519388277005642EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		711A50B719388277005642EF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -114,6 +117,8 @@
 				711A50C519388277005642EF /* ESAppDelegate.m */,
 				4FF7BCE61A687676007AB98B /* Entry.h */,
 				4FF7BCE71A687676007AB98B /* Entry.m */,
+				4FF7BCE91A6880A7007AB98B /* EntryController.h */,
+				4FF7BCEA1A6880A7007AB98B /* EntryController.m */,
 				711A50C719388277005642EF /* Images.xcassets */,
 				711A50BC19388277005642EF /* Supporting Files */,
 			);
@@ -247,6 +252,7 @@
 			files = (
 				4FF7BCE81A687676007AB98B /* Entry.m in Sources */,
 				711A50C619388277005642EF /* ESAppDelegate.m in Sources */,
+				4FF7BCEB1A6880A7007AB98B /* EntryController.m in Sources */,
 				711A50C219388277005642EF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
