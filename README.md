@@ -51,7 +51,6 @@ Learn basics of a custom model object used for data storage, and a singleton con
   - + (EntryController *)sharedInstance
   - - (void)addEntry:(Entry *)entry
   - - (void)removeEntry:(Entry *)entry
-  - - (void)replaceEntry:(NSDictionary *)oldEntry withEntry:(NSDictionary *)newEntry
   
 The shared instance method should be defined to match the gist here:
 https://gist.github.com/jkhowland/89e24b5fb6e1b5048eb5
@@ -60,25 +59,19 @@ The addEntry method needs to create a mutable version of the controller's entrie
 
 The removeEntry method needs to do the reverse. It should create a mutable copy of the entries array, remove the entry that was passed in, and then re-set the controllers Entries array.
 
-The replaceEntry method needs to find the index of the oldEntry and replace it if it exists. It should create a mutable copy of the entries array, check to see if it contains oldEntry, and then if it does find the index and replace object at index.
+Note: Pointers. Because the entities stored in the array are mutable objects, we can change them and they will update inside the array. So we don't need any method for changing an entry.
 
-###Step 5: Update the controller to store the dictionary Entries to NSUserDefaults
-- Add a method 'loadFromDefaults'
-  - Add a static string for the entryListKey
-  - Get an arry "entryDictionaries" from NSUserDefaults for the entryListKey
-  - Set self.entries to entryDictionaries
-  - Call loadFromDefaults in the sharedInstance method
-- Add a method 'synchronize'
-  - Save self.entries to NSUserDefaults for key entryListKey
-  - Call this method at the end of addEntry and removeEntry and replaceEntry methods
-
-###Step 6: Change the Controller to accept Entries instead of dictionaries
-- Change the methods to take Entries instead of dictionaries
-- All you have to do for addEntry, removeEntry and replaceEntry is change the parameter type
-
-###Step 7: Store Dictionaries in NSUserDefaults and Entries in self.entries
+###Step 5: Update the controller to retrieve and store it's array from NSUserDefaults
 - Move the loadEntriesFromDefaults method to the controller class  
-- Set self.entries to [self loadEntriesFromDefaults]
+  - In the sharedInstance method set sharedInstance.entries to [self loadEntriesFromDefaults]
 - Move the storeEntriesInDefaults: method to the controller class
-- 
-  
+  - You can call this in two ways. You can:
+    - In the setter method of entries call storeEntriesInDefaults and pass in the new entries array
+    - Make sure that addEntry and removeEntry are setting self.entries at the end of the methods
+
+###Notes: Testing completion
+*You can test completion in the AppDelegate didFinishLaunching method by 1) retrieving the entry count, 2) Initalizing and entry and setting it's properties, and 3) adding that entry to the entry controller. Then if you quit and launch the app there should be a new entry in the list that is retrieved from persistance.*
+
+## Code Bank
+
+At this point you will have sample code of object and controller classes that you can reuse.
