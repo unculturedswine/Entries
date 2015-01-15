@@ -7,6 +7,7 @@
 //
 
 #import "ESAppDelegate.h"
+#import "Entry.h"
 
 @implementation ESAppDelegate
 
@@ -16,6 +17,25 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    // Retrieve existing entries
+    
+    NSMutableArray *entries = [Entry loadEntriesFromDefaults];
+    
+    // Initialize an Entry with a dictionary
+    
+    Entry *entry = [[Entry alloc] initWithDictionary:@{titleKey: @"Some Title huh?", textKey: @"Random text that no-one will see"}];
+    
+    // Add that entry to the entry array
+    
+    [entries addObject:entry];
+    
+    // Store the new array to user defaults
+    
+    [Entry storeEntriesInDefaults:entries];
+    
+    NSLog(@"%@", entries);
+    
     return YES;
 }
 
