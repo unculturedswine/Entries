@@ -7,6 +7,7 @@
 //
 
 #import "ESAppDelegate.h"
+#import "Entry.h"
 
 @implementation ESAppDelegate
 
@@ -14,9 +15,49 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    NSArray *entriesFromDefaults = [self retrieveEntriesFromDefaults]; // Retrieve entries, save as 'entriesFromDefaults'
+    NSMutableArray *mutableEntriesFromDefaults = [NSMutableArray arrayWithArray:entriesFromDefaults]; // This saves us from copying 'nil'
+    
+    NSMutableDictionary *entryDictionary = [NSMutableDictionary dictionary];
+    [entryDictionary setValue:@"Our first Entry" forKey:titleKey];
+    [entryDictionary setValue:@"This would be the note" forKey:noteKey];
+    [entryDictionary setValue:[NSDate date] forKey:createdTimeKey];
+    
+    Entry *entry = [[Entry alloc] initWithDictionary:entryDictionary];
+   
+    [mutableEntriesFromDefaults addObject:entry];
+    
+    [self storeEntriesToDefaults:mutableEntriesFromDefaults];
+
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (NSArray *)retrieveEntriesFromDefaults {
+    NSArray *entryDictionaries = [[NSUserDefaults standardUserDefaults] objectForKey:@"Entries"];
+    
+    NSMutableArray *mutableEntries = [NSMutableArray array];
+    for (NSDictionary *entryDictionary in entryDictionaries) {
+        Entry *entry = [[Entry alloc] initWithDictionary:entryDictionary];
+        [mutableEntries addObject:entry];
+    }
+    return mutableEntries;
+}
+
+- (void)storeEntriesToDefaults:(NSArray *)entries {
+    NSMutableArray *mutableEntryDictionaries = [NSMutableArray array];
+    
+    for (Entry *entry in entries) {
+        NSDictionary *entryDictionary = [entry entryDictionary];
+        [mutableEntryDictionaries addObject:entryDictionary];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:mutableEntryDictionaries forKey:@"Entries"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
